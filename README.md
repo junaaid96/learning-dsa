@@ -1,207 +1,105 @@
-## DSA Topic Map – Explanations & C++ Practice Problems
+# learning-dsa — C++ Data Structures & Algorithms
 
-This folder turns the **DSA — Thinking Map** from the PDF into **concrete, code-level intuition** using small, focused C++ problems.
+A structured, self-checking C++17 resource for learning DSA for interviews and competitive programming. Every topic folder has a **concept guide** (`README.md`) and small, heavily commented `.cpp` files. Each file states the problem, the idea, time/space complexity and a link to a real judge problem (LeetCode / Codeforces / CSES / GfG), and its `main()` verifies itself with `assert`.
 
-Each topic below has:
-- **Concept**: What the idea means and when to use it.
-- **Why it matters**: The interview / real-world angle.
-- **Example file**: A C++ file in this folder that you can compile and run.
+## Quick start
 
-All examples use **modern C++**, avoid `using namespace std;`, and are written to be **self-explanatory and beginner-friendly**.
+```bash
+# compile & run a single file
+g++ -std=c++17 -Wall -Wextra graphs/graph_bellman_ford.cpp -o /tmp/a && /tmp/a
 
----
+# compile & run everything (or one folder)
+./run_all.sh
+./run_all.sh dynamic_programming
+CXX=clang++ ./run_all.sh   # pick a compiler
+```
 
-### 1. Foundations
+Each program prints `<name>: all tests passed`; `run_all.sh` prints a PASS/FAIL line per file and a summary, and exits non-zero on any failure.
 
-#### 1.1 Time & Space Complexity
-- **Concept**: Measure how running time and memory grow as input size \(n\) increases, using Big-O notation.
-- **Why it matters**: Lets you choose between multiple correct solutions and avoid approaches that will time out on large inputs.
-- **Example**: `foundations/time_space_complexity_demo.cpp`
-  - Compares \(O(n)\), \(O(n \log n)\), and \(O(n^2)\) style loops with simple counters.
+## Roadmap / table of contents
 
-#### 1.2 Recursion & Call Stack
-- **Concept**: A function that calls itself with a **smaller subproblem**, plus a **base case** to stop.
-- **Why it matters**: Many DSA patterns (divide & conquer, backtracking, DP) are most naturally expressed recursively.
-- **Example**: `foundations/recursion_gcd_euclidean.cpp`
-  - Implements GCD using the Euclidean algorithm both **recursively** and **iteratively**.
+Study the stages in order; inside a stage the order of the table is the suggested order.
 
-#### 1.3 Bit Manipulation
-- **Concept**: Work directly on bits using `&`, `|`, `^`, `~`, `<<`, `>>`.
-- **Why it matters**: Super fast, space-efficient tricks (parity, power-of-two checks, masks) show up in interviews and low-level work.
-- **Example**: `foundations/bit_manipulation_power_of_two.cpp`
-  - Checks if a number is a power of two using `n & (n - 1)`.
+### Stage 1 – Foundations
 
----
+| Topic | Files | Guide |
+|---|---|---|
+| Foundations (complexity, recursion, bits) | 3 | [`foundations/`](foundations/README.md) |
+| Arrays & Strings basics | 4 | [`arrays_strings/`](arrays_strings/README.md) |
+| Core algorithms (binary search, merge sort, backtracking intro) | 3 | [`core_algorithms/`](core_algorithms/README.md) |
+| Sorting | 3 | [`sorting/`](sorting/README.md) |
 
-### 2. Arrays & Strings
+### Stage 2 – Core patterns
 
-#### 2.1 Sliding Window
-- **Concept**: Maintain a **window** \([l, r]\) over the array/string and move it while maintaining some property.
-- **Why it matters**: Converts many naive \(O(n^2)\) subarray / substring problems to \(O(n)\).
-- **Example**: `arrays_strings/sliding_window_max_sum_k.cpp`
-  - Finds maximum sum of any subarray of fixed size `k`.
+| Topic | Files | Guide |
+|---|---|---|
+| Hashing (hash maps & sets) | 5 | [`hashing/`](hashing/README.md) |
+| Two Pointers & Sliding Window | 7 | [`two_pointers_sliding_window/`](two_pointers_sliding_window/README.md) |
+| Prefix Sums & Difference Arrays | 4 | [`prefix_sum_difference/`](prefix_sum_difference/README.md) |
+| Binary Search (on index and on answer) | 5 | [`binary_search/`](binary_search/README.md) |
+| Stacks & Queues | 3 | [`stack_queue/`](stack_queue/README.md) |
+| Monotonic Stack & Queue | 3 | [`monotonic_stack_queue/`](monotonic_stack_queue/README.md) |
+| Linked Lists | 4 | [`linked_list/`](linked_list/README.md) |
 
-#### 2.2 Two Pointers
-- **Concept**: Use two indices that move towards each other or in the same direction based on conditions.
-- **Why it matters**: Great for **sorted arrays**, palindrome checks, and many "pair" problems.
-- **Example**: `arrays_strings/two_pointers_two_sum_sorted.cpp`
-  - Finds two numbers in a sorted array that sum to a target.
+### Stage 3 – Greedy & search
 
-#### 2.3 Prefix Sum
-- **Concept**: Precompute cumulative sums so you can answer range sum queries in \(O(1)\).
-- **Why it matters**: Frequent pattern in subarray-sum queries and constraints where you answer many queries on the same array.
-- **Example**: `arrays_strings/prefix_sum_range_query.cpp`
-  - Builds a prefix sum array and answers multiple range sum queries.
+| Topic | Files | Guide |
+|---|---|---|
+| Greedy | 4 | [`greedy/`](greedy/README.md) |
+| Heaps / Priority Queues | 3 | [`heaps/`](heaps/README.md) |
+| Intervals & Sweep Line | 2 | [`intervals_sweep_line/`](intervals_sweep_line/README.md) |
+| Backtracking | 4 | [`backtracking/`](backtracking/README.md) |
+| Bit Manipulation | 3 | [`bit_manipulation/`](bit_manipulation/README.md) |
 
-#### 2.4 Kadane’s Algorithm (Max Subarray)
-- **Concept**: Track current best subarray ending at index `i`, reset when it becomes negative.
-- **Why it matters**: Classic DP pattern and interview staple, teaches you to carry **state** across the array.
-- **Example**: `arrays_strings/kadane_max_subarray.cpp`
-  - Computes the maximum subarray sum in \(O(n)\).
+### Stage 4 – Trees & graphs
 
----
+| Topic | Files | Guide |
+|---|---|---|
+| Trees, BSTs & Tries | 7 | [`trees/`](trees/README.md) |
+| Graphs | 12 | [`graphs/`](graphs/README.md) |
+| Disjoint Set Union (Union-Find) | 2 | [`dsu/`](dsu/README.md) |
 
-### 3. Linked List
+### Stage 5 – Dynamic programming
 
-#### 3.1 Fast & Slow Pointers – Cycle Detection
-- **Concept**: Use two pointers moving at different speeds over the list.
-- **Why it matters**: Detects cycles in \(O(n)\) time and \(O(1)\) extra space.
-- **Example**: `linked_list/linked_list_cycle_detection.cpp`
-  - Builds a sample list with a cycle and detects it using Floyd’s algorithm.
+| Topic | Files | Guide |
+|---|---|---|
+| Dynamic Programming | 14 | [`dynamic_programming/`](dynamic_programming/README.md) |
 
-#### 3.2 Linked List Reversal
-- **Concept**: Iteratively reverse the `.next` pointers using three pointers `prev`, `curr`, `next`.
-- **Why it matters**: Very common utility in bigger linked-list problems (reverse in groups, etc.).
-- **Example**: `linked_list/linked_list_reverse.cpp`
-  - Reverses a singly linked list and prints before/after.
+### Stage 6 – Competitive programming extras
 
----
+| Topic | Files | Guide |
+|---|---|---|
+| String Algorithms | 5 | [`strings/`](strings/README.md) |
+| Number Theory | 3 | [`number_theory/`](number_theory/README.md) |
+| Math & Combinatorics | 2 | [`math_combinatorics/`](math_combinatorics/README.md) |
+| Range Queries (Fenwick, Segment Tree, Sparse Table) | 3 | [`range_queries/`](range_queries/README.md) |
+| Matrices & 2D grids | 2 | [`matrix_2d/`](matrix_2d/README.md) |
+| Computational Geometry basics | 1 | [`geometry/`](geometry/README.md) |
 
-### 4. Stack & Queue
+## Extra resources in this repo
 
-#### 4.1 Valid Parentheses (Stack)
-- **Concept**: Use stack to match opening and closing brackets.
-- **Why it matters**: Foundation for many parsing, compiler, and expression problems.
-- **Example**: `stack_queue/stack_valid_parentheses.cpp`
-  - Checks if a string of brackets is valid.
+- [PATTERNS_CHEATSHEET.md](PATTERNS_CHEATSHEET.md) — "if the problem says X, think Y" table plus constraint → complexity guide.
+- [XPSC/](XPSC/README.md) — 16-week day-wise practice tracker (checkbox lists) with commented solutions in `XPSC/solutions/`.
 
-#### 4.2 Monotonic Deque – Sliding Window Maximum
-- **Concept**: Maintain a deque of indices where values are **monotonically decreasing**.
-- **Why it matters**: Solves sliding window maximum in \(O(n)\) instead of \(O(nk)\).
-- **Example**: `stack_queue/deque_sliding_window_maximum.cpp`
-  - Computes max for each window of size `k`.
+## Suggested study order (weekly plan)
 
----
+1. **Weeks 1–2:** foundations, arrays/strings, sorting, hashing. Solve the *Easy* lists.
+2. **Weeks 3–4:** two pointers/sliding window, prefix sums, binary search (incl. on the answer).
+3. **Weeks 5–6:** stacks, monotonic stack/queue, linked lists, heaps, intervals.
+4. **Weeks 7–8:** greedy, backtracking, bit manipulation.
+5. **Weeks 9–11:** trees, graphs, DSU.
+6. **Weeks 12–14:** dynamic programming (1D → knapsack → strings → intervals → bitmask/digit/tree).
+7. **Weeks 15+:** strings, number theory, combinatorics, range queries, matrices, geometry; run XPSC in parallel.
 
-### 5. Trees
+For every topic: read the guide → read and run the example files → solve Easy → Medium → Hard from the guide → write down the pattern in your own words.
 
-#### 5.1 Binary Tree Traversals
-- **Concept**: Visit nodes in different orders (preorder, inorder, postorder, level order).
-- **Why it matters**: Basis for almost all tree problems.
-- **Example**: `trees/tree_traversals_basic.cpp`
-  - Builds a small binary tree and prints traversals.
+## Conventions
 
-#### 5.2 Binary Search Tree (BST) Operations
-- **Concept**: Ordered binary tree with left < root < right.
-- **Why it matters**: Enables logarithmic-time search, insert, and delete in average case.
-- **Example**: `trees/bst_insert_search_inorder.cpp`
-  - Inserts nodes, searches values, and prints inorder traversal.
+- C++17, no `using namespace std;`, explicit `std::`.
+- Header comment: problem, link, idea, time/space, compile command.
+- Line-by-line comments explain *why*, not just *what*.
+- `assert`-based self-tests in `main()`; all files compile cleanly with `-Wall -Wextra`.
 
-#### 5.3 Lowest Common Ancestor (LCA)
-- **Concept**: Find the deepest node that is an ancestor of two given nodes.
-- **Why it matters**: Appears in tree / graph problems related to hierarchy and paths.
-- **Example**: `trees/tree_lca_binary_tree.cpp`
-  - Finds LCA in a general binary tree using recursion.
+## License
 
----
-
-### 6. Graphs
-
-#### 6.1 BFS – Shortest Path in Unweighted Graph
-- **Concept**: Level-by-level traversal using a queue.
-- **Why it matters**: Gives shortest path (in edges) in unweighted graphs.
-- **Example**: `graphs/graph_bfs_shortest_path.cpp`
-  - Finds shortest path between two vertices in an unweighted graph.
-
-#### 6.2 DFS – Connected Components
-- **Concept**: Depth-first traversal using recursion or an explicit stack.
-- **Why it matters**: Used to find connected components, detect cycles, and explore all reachable nodes.
-- **Example**: `graphs/graph_dfs_connected_components.cpp`
-  - Counts connected components in an undirected graph.
-
-#### 6.3 Topological Sort (Kahn’s Algorithm)
-- **Concept**: Linear ordering of vertices where each directed edge `u → v` means `u` comes before `v`.
-- **Why it matters**: Core for scheduling, build systems, and dependency resolution in DAGs.
-- **Example**: `graphs/graph_toposort_kahn.cpp`
-  - Performs topological sort on a DAG using BFS-style in-degree approach.
-
-#### 6.4 Dijkstra – Shortest Path with Weights
-- **Concept**: Greedy algorithm using a priority queue for non-negative edge weights.
-- **Why it matters**: Standard for routing and pathfinding where edges have different costs.
-- **Example**: `graphs/graph_dijkstra_shortest_path.cpp`
-  - Computes shortest paths from a source node in a weighted graph.
-
----
-
-### 7. Core Algorithms & Patterns
-
-#### 7.1 Binary Search
-- **Concept**: Repeatedly halve the search space in a sorted array.
-- **Why it matters**: Extremely common pattern; also used inside many other algorithms.
-- **Example**: `core_algorithms/binary_search_variants.cpp`
-  - Shows standard binary search, first occurrence, and last occurrence.
-
-#### 7.2 Merge Sort (Divide & Conquer)
-- **Concept**: Divide array, sort halves recursively, then merge.
-- **Why it matters**: Stable \(O(n \log n)\) sort; great example of divide & conquer.
-- **Example**: `core_algorithms/merge_sort_demo.cpp`
-  - Implements merge sort and prints sorted output.
-
-#### 7.3 Backtracking – Subsets
-- **Concept**: Systematically build solutions, undo choices when they no longer work.
-- **Why it matters**: Core pattern for permutations, combinations, N-Queens, Sudoku, etc.
-- **Example**: `core_algorithms/backtracking_subsets.cpp`
-  - Generates all subsets of a set of integers.
-
----
-
-### 8. Dynamic Programming (DP)
-
-#### 8.1 0/1 Knapsack
-- **Concept**: Decide for each item whether to take it or leave it, with a weight constraint.
-- **Why it matters**: Teaches how to define a DP state and transition; many problems reduce to knapsack-like states.
-- **Example**: `dynamic_programming/dp_knapsack_01.cpp`
-  - Classic DP table solution for 0/1 knapsack.
-
-#### 8.2 Longest Increasing Subsequence (LIS)
-- **Concept**: Longest subsequence where elements strictly increase.
-- **Why it matters**: Trains you to think about **subsequence vs subarray** and DP state over indices.
-- **Example**: `dynamic_programming/dp_lis_n2.cpp`
-  - \(O(n^2)\) DP implementation for LIS with reconstruction of one LIS.
-
-#### 8.3 Matrix DP – Unique Paths
-- **Concept**: Grid-based DP where `dp[i][j]` depends on neighbors (top/left).
-- **Why it matters**: Many path / grid problems share this pattern.
-- **Example**: `dynamic_programming/dp_unique_paths_grid.cpp`
-  - Counts number of ways to go from top-left to bottom-right moving only right or down.
-
----
-
-### How to Use This Folder
-
-- **Read the PDF DSA section**, then:
-  1. Pick a topic you want to strengthen.
-  2. Open the corresponding `.cpp` file listed above.
-  3. Read the comments at the top to understand the problem and approach.
-  4. Compile and run, tweak inputs, and try to:
-     - Change constraints.
-     - Add edge cases.
-     - Re-implement from scratch without looking.
-
-- Over time, you should be able to:
-  - **Recognize patterns** from the problem description (sliding window, two pointers, DP, etc.).
-  - **Explain trade-offs**: time vs space, brute-force vs optimized.
-  - **Code cleanly** under time pressure with clear structure and variable names.
-
-Add more `.cpp` files as you practice new problems, following the same structure and style.
-
+[MIT](LICENSE) © 2026 Md. Junaidul Islam
