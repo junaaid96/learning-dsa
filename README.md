@@ -2,6 +2,10 @@
 
 A structured, self-checking C++17 resource for learning DSA for interviews and competitive programming. Every topic folder has a **concept guide** (`README.md`) and small, heavily commented `.cpp` files. Each file states the problem, the idea, time/space complexity and a link to a real judge problem (LeetCode / Codeforces / CSES / GfG), and its `main()` verifies itself with `assert`.
 
+## Website
+
+Browse every guide, C++ solution and the XPSC tracker with search and dark mode at **[junaaid96.github.io/learning-dsa](https://junaaid96.github.io/learning-dsa/)**. The site is built from this repo's Markdown by [`website/`](website/) and redeploys on every push to `main`.
+
 ## Quick start
 
 ```bash
