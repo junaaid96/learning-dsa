@@ -30,7 +30,7 @@ while IFS= read -r -d '' file; do
     else
         echo "RUN FAIL      $rel"; cat "$exe.out"; fail=$((fail+1)); failed+=("$rel")
     fi
-done < <(cd "$ROOT" && find "$ROOT/$TARGET" -name '*.cpp' -not -path '*/.git/*' -print0 | sort -z)
+done < <(cd "$ROOT" && find "$ROOT/$TARGET" -name '*.cpp' -not -path '*/.git/*' -not -path '*/website/*' -print0 | sort -z)
 
 echo
 echo "Passed: $pass  Failed: $fail"
